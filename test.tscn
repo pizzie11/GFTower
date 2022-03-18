@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/simple_fpsplayer/Player.tscn" type="PackedScene" id=1]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.968627, 0.54902, 0.0156863, 1 )
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_unshaded = true
+albedo_color = Color( 0.964706, 0.643137, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=3]
+flags_unshaded = true
+
+[node name="Spatial" type="Spatial"]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.1489, -7.81221 )
+
+[node name="CSGBox" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.31724, -0.42664 )
+use_collision = true
+width = 22.1559
+depth = 30.5538
+
+[node name="CSGBox2" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.90362, 0, 5.02466 )
+use_collision = true
+height = 3.73597
+material = SubResource( 1 )
+
+[node name="CSGBox3" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0222, 0, 7.01024 )
+use_collision = true
+height = 3.73597
+material = SubResource( 1 )
+
+[node name="CSGCylinder" type="CSGCylinder" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01952, -9.38711 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+height = 3.838
+material = SubResource( 2 )
+
+[node name="CSGBox4" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13.7328 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 15.9954
+height = 12.0115
+material = SubResource( 3 )

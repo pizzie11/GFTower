@@ -1,0 +1,90 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://enemy.gd" type="Script" id=1]
+
+[sub_resource type="OpenSimplexNoise" id=24]
+octaves = 9
+period = 256.0
+persistence = 1.0
+lacunarity = 0.1
+
+[sub_resource type="NoiseTexture" id=22]
+flags = 2
+width = 64
+height = 64
+noise = SubResource( 24 )
+
+[sub_resource type="CylinderShape" id=23]
+
+[sub_resource type="BoxShape" id=25]
+extents = Vector3( 8, 8, 8 )
+
+[sub_resource type="BoxShape" id=26]
+extents = Vector3( 4, 4, 4 )
+
+[sub_resource type="BoxShape" id=27]
+extents = Vector3( 0.5, 0.1, 0.5 )
+
+[node name="Enemy" type="StaticBody"]
+collision_layer = 10
+collision_mask = 10
+script = ExtResource( 1 )
+
+[node name="CSGCylinder" type="CSGCylinder" parent="."]
+height = 2.0
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.05
+billboard = 1
+texture = SubResource( 22 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 23 )
+
+[node name="Viewer" type="Area" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape" type="CollisionShape" parent="Viewer"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 18 )
+shape = SubResource( 25 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="Viewer"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6 )
+shape = SubResource( 26 )
+
+[node name="BottomCollider" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="BottomCollider"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0 )
+shape = SubResource( 27 )
+
+[node name="FloorDetector" type="RayCast" parent="."]
+enabled = true
+cast_to = Vector3( 0, -4, 0 )
+
+[node name="StunTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="ReverseTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="ChargeTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DechargeTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="Viewer" to="." method="_on_Area_body_entered"]
+[connection signal="body_entered" from="BottomCollider" to="." method="_on_Collider_body_entered"]
+[connection signal="body_exited" from="BottomCollider" to="." method="_on_Collider_body_exited"]
+[connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]
+[connection signal="timeout" from="ReverseTimer" to="." method="_on_ReverseTimer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
+[connection signal="timeout" from="ChargeTimer" to="." method="_on_ChargeTimer_timeout"]
+[connection signal="timeout" from="DechargeTimer" to="." method="_on_DechargeTimer_timeout"]
