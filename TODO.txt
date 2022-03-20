@@ -1,0 +1,11 @@
+-limit on gun firing speed (think how scattergun tf2 does it)
+-fine tune enemy projectiles, maybe figure out a particle effect for it??
+-player health, (planning just to go with the normal fps numerical health thing, 100 HP)
+-health/ammo pickups
+And then in the Long Long term it would be nice to have
+-menu screen
+-options menu
+-pause screen
+rest of it really is art assets but next time i sit down to work on it ima gonna start filling more stuff with programmer art lol
+oh wait
+-i was thinking some stationary floating orb enemy? like a ponderable orb type beat along with the ground wizard type thats somewhat implemented now, think same thing but with a few values/states tweaked, i can open up the Enemy class to make that workable too
